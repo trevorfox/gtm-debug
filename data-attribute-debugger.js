@@ -1,23 +1,32 @@
-var attrs = ["data-gtm-event", "data-gtm-action", "data-gtm-label"];
-var dataEvents = document.querySelectorAll('*[' + attrs.join("],*[") + ']' );
-console.log("Data Attribute Element");
-console.log(dataEvents);
-for (var i=0; i < dataEvents.length; i++){
-  var el = dataEvents[i];
-  var info = "Element: " + el.tagName.toLowerCase() + "\x0A"
-           + "Name: " + (el.innerText ? el.innerText.trim() : el.getAttribute('title')) + "\x0A";
+(function(){
 
-  for (var a = 0; a < attrs.length; a++){
-    var attr = attrs[a];
-    info += attr + ": " + el.getAttribute(attr) + "\x0A";
+  // List all data attributes to check for
+  var attrs = ["data-gtm-event", "data-gtm-action", "data-gtm-label"];
+
+  // DOM object list of all elements with specified data attributes
+  var dataElems = document.querySelectorAll('*[' + attrs.join("],*[") + ']' );
+
+  console.log("Data Attribute Elements");
+  console.log(dataElems);
+
+  // Create an 'info' string with encoded linebreaks to set to element title.
+  for (var i = 0; i < dataElems.length; i++){
+    var el = dataElems[i];
+    var info = "Element: " + el.tagName.toLowerCase() + "\x0A";
+        info += "Name: " + (el.innerText ? el.innerText.trim() : el.getAttribute('title')) + "\x0A";
+
+    for (var a = 0; a < attrs.length; a++){
+      var attr = attrs[a];
+      info += attr + ": " + el.getAttribute(attr) + "\x0A";
+    }
+
+    // Make stuff look cool and do stuff
+    el.style.border = "thick outset orange";
+    el.style.color = "blue";
+    el.setAttribute('title', info);
+    el.onclick = function(e){
+      console.log(this);
+      alert(this.getAttribute('title'));
+    };
   }
-
-  el.style.border = "thick outset red";
-  el.style.color = "blue";
-  el.setAttribute('title', info);
-  el.onclick = function(e){
-    console.log(this);
-    e.preventDefault;
-    alert(info);
-  };
-}
+}());
