@@ -1,7 +1,7 @@
 (function(){
 
   // List all data attributes to check for
-  var attrs = ["data-gtm-event", "data-gtm-action", "data-gtm-label"];
+  var attrs = ["ga-on", "ga-event-category", "ga-event-action"];
 
   // DOM object list of all elements with specified data attributes
   var dataElems = document.querySelectorAll('*[' + attrs.join("],*[") + ']' );
@@ -21,8 +21,9 @@
     }
 
     // Make stuff look cool and do stuff
-    el.style.border = "thick outset orange";
-    el.style.color = "blue";
+    el.style.border = "thick outset deepskyblue";
+    el.style["background-color"] = "coral";
+    el.style.color = "deepskyblue";
     el.setAttribute('title', info);
     el.onclick = function(e){
       console.log(this);
